@@ -6,7 +6,7 @@
 # Usage:
 # ------
 # build.ps1 [-openssl_release 1.0.0 | 1.1.0]
-#           [-vs_version 150 | 140 | 120 | 110 | 100 | 90]
+#           [-vs_version 160 | 150 | 140 | 120 | 110 | 100 | 90]
 #           [-config     release | debug | both]
 #           [-platform   Win32 | x64]
 #           [-library    shared | static | both]
@@ -27,7 +27,7 @@ Param
   [string] $openssl_release = "1.1.0",
 
   [Parameter()]
-  [ValidateSet(90, 100, 110, 120, 140, 150)]
+  [ValidateSet(90, 100, 110, 120, 140, 150, 160)]
   [int] $vs_version = 120,
 
   [Parameter()]
@@ -128,7 +128,8 @@ function Load-DevelopmentTools {
 
   if ($vs_version -eq 0)
     {
-      if     ($Env:VS150COMNTOOLS -ne '') { $script:vs_version = 150 }
+      if     ($Env:VS160COMNTOOLS -ne '') { $script:vs_version = 160 }
+      elseif ($Env:VS150COMNTOOLS -ne '') { $script:vs_version = 150 }
       elseif ($Env:VS140COMNTOOLS -ne '') { $script:vs_version = 140 }
       elseif ($Env:VS120COMNTOOLS -ne '') { $script:vs_version = 120 }
       elseif ($Env:VS110COMNTOOLS -ne '') { $script:vs_version = 110 }
